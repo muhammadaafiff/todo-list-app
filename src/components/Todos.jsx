@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { connect } from 'react-redux'
 import { addTodos, removeTodos } from '../redux/Reducer'
 
@@ -16,6 +16,8 @@ const mapDispatchToProps = (dispatch) => {
 }
 const Todos = (props) => {
   const [todo, setTodo] = useState("")
+
+  const inputRef = useRef(true)
 
   const handleChange = (event) => {
     setTodo(event.target.value)
@@ -36,8 +38,15 @@ const Todos = (props) => {
 
         <ul>
           {props.todos.map((item) => {
-            return <li key={item.id} > {item.item} 
+            return (
+              <li key={item.id} > 
+            <textarea ref={inputRef} disabled={inputRef} defaultValue={item.item}/>
+
+
+            <button>Edit</button>
             <button onClick={() => props.removeTodo(item.id)}>Delete</button>{""}</li>
+            )
+            
           })}
         </ul>
 
