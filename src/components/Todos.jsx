@@ -29,7 +29,15 @@ const Todos = (props) => {
           item : todo,
           completed : false
 
-        })}>Add</button>
+        })}>
+          Add</button>
+        <br/>
+
+        <ul>
+          {props.todos.map((item) => {
+            return <li key={item.id} > {item.item}</li>
+          })}
+        </ul>
 
     </div>
   )
