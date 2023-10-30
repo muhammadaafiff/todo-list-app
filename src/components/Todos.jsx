@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addTodos } from "../redux/Reducer";
 
-
 const mapStateToProps = (state) => {
   return {
     todos: state,
@@ -46,7 +45,6 @@ const Todos = (props) => {
         Add
       </button>
       <br />
-
     </div>
   );
 };
