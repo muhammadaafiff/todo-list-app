@@ -11,7 +11,7 @@ const TodoItem = (props) => {
     };
   
     const update = (id, value, event) => {
-      if ((event, which === 13)) {
+      if (event.which === 13) {
         updateTodo({ id, item: value });
         inputRef.current.disabled = true;
       }
@@ -23,9 +23,7 @@ const TodoItem = (props) => {
                 ref={inputRef}
                 disabled={inputRef}
                 defaultValue={item.item}
-                onKeyPress={(event) =>
-                  update(item.id, inputRef.current.value, event)
-                }
+                onKeyPress={(event) => update(item.id, inputRef.current.value, event)}
               />
 
               <button onClick={() => changeFocus()}>Edit</button>
