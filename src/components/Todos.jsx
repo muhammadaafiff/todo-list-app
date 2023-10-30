@@ -22,6 +22,19 @@ const Todos = (props) => {
   };
   // console.log("props from store", props);
 
+  const add = () => {
+    if (todo === "") {
+      alert("Input is Empty");
+    } else {
+      props.addTodo({
+        id: Math.floor(Math.random() * 1000),
+        item: todo,
+        completed: false,
+      });
+      setTodo("");
+    }
+  };
+  
   return (
     <div className="addTodos">
       <input
@@ -31,18 +44,14 @@ const Todos = (props) => {
         onChange={(event) => handleChange(event)}
       />
 
-      <button
+<motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
         className="add-btn"
-        onClick={() =>
-          props.addTodo({
-            id: Math.floor(Math.random() * 1000),
-            item: todo,
-            completed: false,
-          })
-        }
+        onClick={() => add()}
       >
         Add
-      </button>
+      </motion.button>
       <br />
     </div>
   );
