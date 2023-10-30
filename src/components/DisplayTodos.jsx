@@ -7,7 +7,6 @@ import {
   removeTodos,
   updateTodos,
 } from "../redux/Reducer";
-import { AnimatePresence } from "framer-motion";
 
 const mapStateToProps = (state) => {
   return {
@@ -29,31 +28,29 @@ const DisplayTodos = (props) => {
   return (
     <div className="displaytodos">
       <div className="buttons">
-      <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => setSort("active")}
-        >
-          Active
-        </motion.button>
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => setSort("completed")}
-        >
-          Completed
-        </motion.button>
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => setSort("all")}
-        >
+        <button className="btn-all" onClick={() => setSort("all")}>
           All
-        </motion.button>
+        </button>
+        <button onClick={() => setSort("active")}>Active</button>
+        <button onClick={() => setSort("completed")}>Complete</button>
       </div>
 
       <ul>
-        <AnimatePresence>
+        {/*semua todos */}
+        {props.todos.length > 0 && sort === "all"
+          ? props.todos.map((item) => {
+              return (
+                <TodoItem
+                  key={item.id}
+                  item={item}
+                  removeTodo={props.removeTodo}
+                  updateTodo={props.updateTodo}
+                  completeTodo={props.completeTodo}
+                />
+              );
+            })
+          : null}
+
         {/*todos yang active */}
         {props.todos.length > 0 && sort === "active"
           ? props.todos.map((item) => {
@@ -87,22 +84,6 @@ const DisplayTodos = (props) => {
               );
             })
           : null}
-
-        {/*semua tooos */}
-        {props.todos.length > 0 && sort === "all"
-          ? props.todos.map((item) => {
-              return (
-                <TodoItem
-                  key={item.id}
-                  item={item}
-                  removeTodo={props.removeTodo}
-                  updateTodo={props.updateTodo}
-                  completeTodo={props.completeTodo}
-                />
-              );
-            })
-          : null}
-        </AnimatePresence>
       </ul>
     </div>
   );

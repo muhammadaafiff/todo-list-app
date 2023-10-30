@@ -1,7 +1,5 @@
 import React, { useRef } from "react";
-import { motion } from "framer-motion";
-import { AiFillEdit } from "react-icons/ai";
-import { IoCheckmarkDoneSharp, IoClose } from "react-icons/io5";
+import { FaPen, FaTrashAlt, FaCheck } from "react-icons/fa";
 
 const TodoItem = (props) => {
   const { item, updateTodo, removeTodo, completeTodo } = props;
@@ -21,60 +19,32 @@ const TodoItem = (props) => {
   };
 
   return (
-    <motion.li
-      initial={{ x: "150vw", transition: { type: "spring", duration: 2 } }}
-      animate={{ x: 0, transition: { type: "spring", duration: 2 } }}
-      whileHover={{
-        scale: 0.9,
-        transition: { type: "spring", duration: 0.1 },
-      }}
-      exit={{
-        x: "-60vw",
-        scale: [1, 0],
-        transition: { duration: 0.5 },
-        backgroundColor: "rgba(255,0,0,1)",
-      }}
-      key={item.id}
-      className="card"
-    >
+    <li key={item.id} className="card">
       <textarea
+        className="bg-transparent"
         ref={inputRef}
         disabled={inputRef}
         defaultValue={item.item}
         onKeyPress={(event) => update(item.id, inputRef.current.value, event)}
       />
 
-      <div className="buttons">
-      <motion.button
-          whileHover={{ scale: 1.4 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => changeFocus()}
-        >
+      <div className="buttons-action">
+        <button onClick={() => changeFocus()}>
           {" "}
-          <AiFillEdit />{" "}
-        </motion.button>
+          <FaPen className="text-yellow-400 decoration-white" />{" "}
+        </button>
         {item.completed === false && (
-          <motion.button
-            whileHover={{ scale: 1.4 }}
-            whileTap={{ scale: 0.9 }}
-            style={{ color: "green" }}
-            onClick={() => completeTodo(item.id)}
-          >
-            <IoCheckmarkDoneSharp />
-          </motion.button>
+          <button onClick={() => completeTodo(item.id)}>
+            <FaCheck className="text-green-800" />
+          </button>
         )}
-        <motion.button
-          whileHover={{ scale: 1.4 }}
-          whileTap={{ scale: 0.9 }}
-          style={{ color: "red" }}
-          onClick={() => removeTodo(item.id)}
-        >
+        <button onClick={() => removeTodo(item.id)}>
           {" "}
-          <IoClose />
-        </motion.button>{" "}
+          <FaTrashAlt className="text-red-700" />
+        </button>{" "}
       </div>
       {item.completed && <span className="completed">done</span>}
-    </motion.li>
+    </li>
   );
 };
 

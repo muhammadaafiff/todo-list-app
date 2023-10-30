@@ -20,7 +20,7 @@ const Todos = (props) => {
   const handleChange = (event) => {
     setTodo(event.target.value);
   };
-  // console.log("props from store", props);
+  // console.log("props dari store", props);
 
   const add = () => {
     if (todo === "") {
@@ -34,7 +34,7 @@ const Todos = (props) => {
       setTodo("");
     }
   };
-  
+
   return (
     <div className="addTodos">
       <input
@@ -44,14 +44,9 @@ const Todos = (props) => {
         onChange={(event) => handleChange(event)}
       />
 
-<motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        className="add-btn"
-        onClick={() => add()}
-      >
+      <button className="add-btn" onClick={() => add()}>
         Add
-      </motion.button>
+      </button>
       <br />
     </div>
   );
