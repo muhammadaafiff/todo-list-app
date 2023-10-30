@@ -11,9 +11,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addTodo: (obj) => dispatch(addTodos(obj)),
-    removeTodo: (id) => dispatch(removeTodos(id)),
-    updateTodo: (obj) => dispatch(updateTodos(obj)),
-    completeTodo: (id) => dispatch(completeTodos(id)),
   };
 };
 
@@ -30,8 +27,10 @@ const Todos = (props) => {
       <input
         type="text"
         className="todo-input"
+        value={todo}
         onChange={(event) => handleChange(event)}
-      ></input>
+      />
+
       <button
         className="add-btn"
         onClick={() =>
